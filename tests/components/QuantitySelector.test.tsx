@@ -55,18 +55,22 @@ describe("QuantitySelectorComponent", () => {
   it("should render Add to cart button when quantity is 0", async () => {
     renderWithProvider(<QuantitySelector product={product} />);
 
+    // User clicks button
     const user = userEvent.setup();
     await user.click(screen.getByRole("button"));
 
+    // User clicks again to remove one unit
     const quantity = screen.getByRole("status");
     const addBtn = screen.getByRole("button", { name: "+" });
     const removeBtn = screen.getByRole("button", { name: "-" });
     await user.click(removeBtn);
 
+    // Buttons disappear
     expect(quantity).not.toBeInTheDocument();
     expect(addBtn).not.toBeInTheDocument();
     expect(removeBtn).not.toBeInTheDocument();
 
+    // Add to cart button reappears
     const button = screen.getByRole("button", { name: /add/i });
     expect(button).toBeInTheDocument();
   });
