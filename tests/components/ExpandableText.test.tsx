@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import ExpandableText from "../../src/components/ExpandableText";
 import userEvent from "@testing-library/user-event";
+import ExpandableText from "../../src/components/ExpandableText";
 
 describe("ExpandableTextComponent", () => {
   const limit = 255;
