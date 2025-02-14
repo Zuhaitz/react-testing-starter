@@ -11,7 +11,6 @@ describe("ProductImageGalleryComponent", () => {
     const imagesUrls = ["url1", "url2"];
     render(<ProductImageGallery imageUrls={imagesUrls} />);
 
-    screen.debug();
     const images = screen.getAllByRole("img");
     expect(images).toHaveLength(2);
     imagesUrls.forEach((url, i) => {

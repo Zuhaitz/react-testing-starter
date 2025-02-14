@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-
 import Greet from "../../src/components/Greet";
 
 describe("GreetComponent", () => {
@@ -7,7 +6,6 @@ describe("GreetComponent", () => {
     render(<Greet name="Zuhaitz" />);
 
     const heading = screen.getByRole("heading");
-    expect(heading).toBeInTheDocument();
     expect(heading).toHaveTextContent(/zuhaitz/i);
   });
 
@@ -15,7 +13,6 @@ describe("GreetComponent", () => {
     render(<Greet />);
 
     const button = screen.getByRole("button");
-    expect(button).toBeInTheDocument();
     expect(button).toHaveTextContent(/login/i);
   });
 });
