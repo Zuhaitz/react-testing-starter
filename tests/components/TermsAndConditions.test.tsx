@@ -14,7 +14,6 @@ describe("TermsAndConditionsComponent", () => {
   };
 
   it("should render with correct text and initial state", () => {
-    // render(<TermsAndConditions />);
     const { heading, checkbox, button } = renderComponent();
 
     expect(heading).toHaveTextContent("Terms & Conditions");
