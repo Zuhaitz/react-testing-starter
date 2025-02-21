@@ -7,18 +7,17 @@ import * as auth0 from "@auth0/auth0-react";
 
 vi.mock("@auth0/auth0-react");
 
+// https://stackoverflow.com/questions/72732768/vue-how-to-mock-auth0-for-testing-with-vitest
 describe("AuthStatusComponent", () => {
   const renderWithProvider = (comp: JSX.Element) => {
     return render(comp);
   };
 
-  // beforeEach(() => renderWithProvider(<AuthStatus />));
-
   it("should", async () => {
     const loginWithRedirect = vi.fn();
     (auth0 as any).useAuth0 = vi.fn().mockReturnValue({
-      user: { name: "John Doe", email: "john@example.com" },
-      isAuthenticated: true,
+      // user: { name: "John Doe", email: "john@example.com" },
+      isAuthenticated: false,
       isLoading: false,
       loginWithRedirect,
     });
@@ -27,14 +26,17 @@ describe("AuthStatusComponent", () => {
 
     screen.debug();
 
-    // const login = await waitFor(() => {
-    //   return screen.getByRole("button");
-    // });
+    const login = await waitFor(() => {
+      return screen.getByRole("button");
+    });
 
-    // expect(login).toHaveTextContent(/in/i);
+    expect(login).toHaveTextContent(/in/i);
 
-    // const user = userEvent.setup();
-    // await user.click(login);
+    const user = userEvent.setup();
+    await user.click(login);
+
+    expect(auth0.useAuth0).toHaveBeenCalled();
+    expect(loginWithRedirect).toHaveBeenCalled();
 
     // await waitFor(() => {
     //   return screen.getByText(/welcome/i);
