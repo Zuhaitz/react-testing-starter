@@ -1,9 +1,11 @@
-import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-
-import LanguageSelector from "../../src/components/LanguageSelector";
-import Providers from "../../src/providers";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+
+import Providers from "../../src/providers";
+import LanguageSelector from "../../src/components/LanguageSelector";
+
+import * as languageHook from "../../src/hooks/useLanguage";
 
 // Ref: https://stackoverflow.com/questions/68679993/referenceerror-resizeobserver-is-not-defined
 // Mock the ResizeObserver
@@ -21,6 +23,16 @@ window.HTMLElement.prototype.hasPointerCapture = vi.fn();
 window.HTMLElement.prototype.scrollIntoView = vi.fn();
 
 describe("LanguageSelector", () => {
+  // Ref: https://www.thisdot.co/blog/how-to-test-react-custom-hooks-and-components-with-vitest
+  const useLanguageSpy = vi.spyOn(languageHook, "default");
+  const changeLanguage = vi.fn();
+
+  useLanguageSpy.mockReturnValue({
+    currentLanguage: "en",
+    changeLanguage,
+    getLabel: vi.fn(),
+  });
+
   beforeEach(() => {
     render(<LanguageSelector />, {
       wrapper: ({ children }) => (
@@ -32,19 +44,18 @@ describe("LanguageSelector", () => {
   });
 
   it("should", async () => {
-    // screen.debug();
+    const buttonEN = screen.getByRole("combobox");
+    expect(buttonEN).toHaveTextContent(/en/i);
+
     const user = userEvent.setup();
-
-    const button = screen.getByRole("combobox");
-    await user.click(button);
-
-    screen.debug();
+    await user.click(buttonEN);
 
     const options = screen.getAllByRole("option");
-    console.log(options);
-    options.forEach((op) => {
-      console.log(op.textContent);
-    });
-    // const menuItems = screen.getAllByRole("menuitem");
+    await user.click(options[1]);
+
+    const buttonES = screen.getByRole("combobox");
+    expect(buttonES).toHaveTextContent(/es/i);
+
+    expect(changeLanguage).toHaveBeenCalled();
   });
 });
