@@ -18,7 +18,7 @@ type ReturnValues = {
 };
 
 // https://stackoverflow.com/questions/72732768/vue-how-to-mock-auth0-for-testing-with-vitest
-describe("AuthStatusComponent", () => {
+describe("AuthStatus", () => {
   const renderComponent = (returnValues: ReturnValues) => {
     (auth0 as any).useAuth0 = vi.fn().mockReturnValue(returnValues);
     render(<AuthStatus />);
@@ -62,6 +62,7 @@ describe("AuthStatusComponent", () => {
     screen.getByText("John Doe");
   });
 
+  // FIXME: logout not used for some reason
   it("should", () => {
     const logout = vi.fn();
     renderComponent({
@@ -72,6 +73,8 @@ describe("AuthStatusComponent", () => {
     });
 
     const logoutButton = screen.getByRole("button");
+    expect(logoutButton).toHaveTextContent(/out/i);
+
     const user = userEvent.setup();
     user.click(logoutButton);
 

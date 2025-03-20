@@ -6,7 +6,6 @@ import Providers from "../../src/providers";
 import LanguageSelector from "../../src/components/LanguageSelector";
 
 import * as languageHook from "../../src/hooks/useLanguage";
-import Label from "../../src/components/Label";
 
 // Ref: https://stackoverflow.com/questions/68679993/referenceerror-resizeobserver-is-not-defined
 // Mock the ResizeObserver

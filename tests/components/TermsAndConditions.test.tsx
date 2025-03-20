@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import TermsAndConditions from "../../src/components/TermsAndConditions";
 
-describe("TermsAndConditionsComponent", () => {
+describe("TermsAndConditions", () => {
   const renderComponent = () => {
     render(<TermsAndConditions />);
 

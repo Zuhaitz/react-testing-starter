@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ProductImageGallery from "../../src/components/ProductImageGallery";
 
-describe("ProductImageGalleryComponent", () => {
+describe("ProductImageGallery", () => {
   it("should return empty dom", () => {
     const { container } = render(<ProductImageGallery imageUrls={[]} />);
     expect(container).toBeEmptyDOMElement();

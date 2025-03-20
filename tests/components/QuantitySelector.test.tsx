@@ -5,7 +5,7 @@ import { Product } from "../../src/entities";
 import { CartProvider } from "../../src/providers/CartProvider";
 import QuantitySelector from "../../src/components/QuantitySelector";
 
-describe("QuantitySelectorComponent", () => {
+describe("QuantitySelector", () => {
   const product: Product = { id: 1, name: "mop", price: 30, categoryId: 1 };
 
   const renderWithProvider = (comp: JSX.Element) => {

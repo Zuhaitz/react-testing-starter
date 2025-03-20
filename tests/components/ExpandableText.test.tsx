@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ExpandableText from "../../src/components/ExpandableText";
 
-describe("ExpandableTextComponent", () => {
+describe("ExpandableText", () => {
   const limit = 255;
   const text = "Short text";
   const longText = "a".repeat(limit + 1);

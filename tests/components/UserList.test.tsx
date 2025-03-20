@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import UserList from "../../src/components/UserList";
 
-describe("UserListComponent", () => {
+describe("UserList", () => {
   it("should not render users if user array is empty", () => {
     render(<UserList users={[]} />);
 

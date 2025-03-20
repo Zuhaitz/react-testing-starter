@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Greet from "../../src/components/Greet";
 
-describe("GreetComponent", () => {
+describe("Greet", () => {
   it("should render Hello with the name when name provided", () => {
     render(<Greet name="Zuhaitz" />);
 
