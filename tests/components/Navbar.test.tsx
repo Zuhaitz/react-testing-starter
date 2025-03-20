@@ -1,9 +1,10 @@
-import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { render, screen, waitFor } from "@testing-library/react";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 import Providers from "../../src/providers";
 import NavBar from "../../src/components/NavBar";
 import * as cartHooks from "../../src/hooks/useCart";
+import userEvent from "@testing-library/user-event";
 
 // Ref: https://stackoverflow.com/questions/68679993/referenceerror-resizeobserver-is-not-defined
 // Mock the ResizeObserver
@@ -27,16 +28,23 @@ describe("NavBar", () => {
   });
 
   beforeEach(() => {
-    render(<NavBar />, {
-      wrapper: ({ children }) => (
-        <MemoryRouter initialEntries={["/"]}>
-          <Providers>{children}</Providers>
-        </MemoryRouter>
-      ),
-    });
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <Providers>
+          <Routes>
+            <Route path="/" element={<NavBar />} />
+            <Route path="/products" element={<div>Products Page</div>} />
+          </Routes>
+        </Providers>
+      </MemoryRouter>
+    );
   });
 
-  it("should", () => {
-    screen.debug();
+  it("should change to products page when link is clicked", async () => {
+    const link = screen.getAllByRole("link")[1];
+    const user = userEvent.setup();
+
+    await user.click(link);
+    expect(screen.getByText(`${link.textContent} Page`)).toBeInTheDocument();
   });
 });
