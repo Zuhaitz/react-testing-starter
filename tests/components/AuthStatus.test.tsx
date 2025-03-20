@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as auth0 from "@auth0/auth0-react";
 
@@ -62,8 +62,7 @@ describe("AuthStatus", () => {
     screen.getByText("John Doe");
   });
 
-  // FIXME: logout not used for some reason
-  it("should", () => {
+  it("should logout user when logout button is pressed", async () => {
     const logout = vi.fn();
     renderComponent({
       user: { name: "John Doe", email: "john@example.com" },
@@ -79,7 +78,7 @@ describe("AuthStatus", () => {
     user.click(logoutButton);
 
     expect(auth0.useAuth0).toHaveBeenCalled();
-    // expect(logout).toHaveBeenCalled();
+    await waitFor(() => expect(logout).toHaveBeenCalled());
   });
 
   afterEach(() => vi.clearAllMocks());
