@@ -40,11 +40,13 @@ describe("NavBar", () => {
     );
   });
 
-  it("should change to products page when link is clicked", async () => {
+  it("should change to another page when link is clicked", async () => {
     const link = screen.getAllByRole("link")[1];
     const user = userEvent.setup();
 
     await user.click(link);
     expect(screen.getByText(`${link.textContent} Page`)).toBeInTheDocument();
   });
+
+  afterEach(() => vi.clearAllMocks());
 });
