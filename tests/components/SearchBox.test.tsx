@@ -5,7 +5,8 @@ import SearchBox from "../../src/components/SearchBox";
 
 describe("SearchBox", () => {
   it("should call onChange function when user presses enter", async () => {
-    const onChange = vi.fn();
+    var inputValue = "";
+    const onChange = vi.fn((v: string) => (inputValue = v));
     render(<SearchBox onChange={onChange} />);
 
     const searchbar = screen.getByRole("textbox");
@@ -17,5 +18,6 @@ describe("SearchBox", () => {
 
     await user.keyboard("{Enter}");
     expect(onChange).toBeCalled();
+    expect(inputValue).toEqual(value);
   });
 });
