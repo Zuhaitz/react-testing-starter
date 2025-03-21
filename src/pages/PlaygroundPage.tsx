@@ -1,7 +1,7 @@
-import AuthStatus from "../components/AuthStatus";
+import SearchBox from "../components/SearchBox";
 
 const PlaygroundPage = () => {
-  return <AuthStatus />;
+  return <SearchBox onChange={() => {}} />;
 };
 
 export default PlaygroundPage;
