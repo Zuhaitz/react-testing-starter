@@ -8,7 +8,7 @@ describe("useCategories", () => {
     <ReactQueryProvider>{children}</ReactQueryProvider>
   );
 
-  it("should", async () => {
+  it("should fetch the categories", async () => {
     const { result } = renderHook(() => useCategories(), { wrapper });
     // Wait for data to be fetched
     await waitFor(() => expect(result.current.isLoading).toBe(false), {
