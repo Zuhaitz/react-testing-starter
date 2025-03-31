@@ -1,7 +1,7 @@
-import SearchBox from "../components/SearchBox";
+import CancelOrderButton from "../components/CancelOrderButton";
 
 const PlaygroundPage = () => {
-  return <SearchBox onChange={() => {}} />;
+  return <CancelOrderButton />;
 };
 
 export default PlaygroundPage;
