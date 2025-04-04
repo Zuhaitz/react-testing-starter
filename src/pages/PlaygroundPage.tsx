@@ -1,7 +1,7 @@
-import CancelOrderButton from "../components/CancelOrderButton";
+import OrderStatusSelector from "../components/OrderStatusSelector";
 
 const PlaygroundPage = () => {
-  return <CancelOrderButton />;
+  return <OrderStatusSelector onChange={() => {}} />;
 };
 
 export default PlaygroundPage;
