@@ -14,7 +14,7 @@ describe("LogoutButton", () => {
     logout,
   });
 
-  it("should", async () => {
+  it("should call logout when button is clicked", async () => {
     render(<LogoutButton />);
 
     const user = userEvent.setup();
