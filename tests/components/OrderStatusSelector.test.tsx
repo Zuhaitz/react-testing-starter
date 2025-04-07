@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react";
-
-import Providers from "../../src/providers";
-import OrderStatusSelector from "../../src/components/OrderStatusSelector";
-import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+
+import OrderStatusSelector from "../../src/components/OrderStatusSelector";
+import Providers from "../../src/providers";
 
 // Ref: https://stackoverflow.com/questions/68679993/referenceerror-resizeobserver-is-not-defined
 // Mock the ResizeObserver
@@ -29,15 +29,18 @@ describe("OrderStatusSelector", () => {
     </MemoryRouter>
   );
 
-  it("should", async () => {
+  it("should change selection when user clicks another option", async () => {
     render(<OrderStatusSelector onChange={onChange} />, { wrapper });
 
     const selector = screen.getByRole("combobox");
     const user = userEvent.setup();
     await user.click(selector);
-    screen.debug();
 
     const options = screen.getAllByRole("option");
-    expect(options.length);
+    expect(options.length).greaterThan(0);
+
+    await user.click(options[1]);
+    expect(selector.textContent).equals(options[1].textContent);
+    expect(options[1]).not.toBeInTheDocument();
   });
 });
